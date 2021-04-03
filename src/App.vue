@@ -11,6 +11,7 @@ export default {
   components: {
     Layout,
   },
+  created() {},
 };
 </script>
 <style lang="less">

@@ -1,35 +1,44 @@
 <template>
   <div class="layoutContainer">
-      <a-layout id="components-layout-demo-custom-trigger">
-        <Aside :collapsed="collapsed"/>
-        <a-layout>
-        <a-layout-header style="background: #fff; padding: 0">
-            <a-icon
+    <a-layout id="components-layout-demo-custom-trigger">
+      <Aside :collapsed="collapsed" />
+      <a-layout>
+        <a-layout-header style="background: #fff; padding: 0;display:flex">
+          <a-icon
             class="trigger"
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
             @click="() => (collapsed = !collapsed)"
-            />
+          />
+          <Breadcrumb class="menu-fold" />
         </a-layout-header>
         <a-layout-content
-            :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
+          :style="{
+            margin: '24px 16px',
+            padding: '24px',
+            background: '#fff',
+            minHeight: '280px',
+          }"
         >
-            <RouterView />
+          <RouterView />
         </a-layout-content>
+      </a-layout>
     </a-layout>
-  </a-layout>
   </div>
 </template>
 <script>
-import Aside  from "@/components/Aside"
+import Aside from "@/components/Aside";
+import Breadcrumb from "@/components/Breadcrumb";
 export default {
-  components:{
-    Aside
+  components: {
+    Aside,
+    Breadcrumb,
   },
   data() {
     return {
       collapsed: false,
     };
   },
+  created() {},
 };
 </script>
 <style>
@@ -50,7 +59,7 @@ export default {
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
-#components-layout-demo-custom-trigger{
-    height:100vh;
+#components-layout-demo-custom-trigger {
+  height: 100vh;
 }
 </style>

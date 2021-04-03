@@ -1,54 +1,29 @@
 <template>
   <div class="breadcrumbContainer">
-    <a-breadcrumb :routes="routes">
-      <template slot="itemRender" slot-scope="{ route, params, routes, paths }">
-        <span v-if="routes.indexOf(route) === routes.length - 1">
-          {{ route.breadcrumbName }}
-        </span>
-        <router-link v-else :to="`${basePath}/${paths.join('/')}`">
-          {{ route.breadcrumbName }}
-        </router-link>
-      </template>
+    <a-breadcrumb>
+      <a-breadcrumb-item>{{
+        $route.matched[0] ? $route.matched[0].meta.title : ""
+      }}</a-breadcrumb-item>
+      <a-breadcrumb-item
+        ><router-link :to="{ name: $route.matched[1].name }">{{
+          $route.matched[1] ? $route.matched[1].meta.title : ""
+        }}</router-link></a-breadcrumb-item
+      >
     </a-breadcrumb>
-    <br />
-    {{ $route.path }}
   </div>
 </template>
 <script>
 export default {
-  data() {
-    const { lang } = this.$route.params;
-    return {
-      basePath: '/components/breadcrumb',
-      routes: [
-        {
-          path: 'index',
-          breadcrumbName: 'home',
-        },
-        {
-          path: 'first',
-          breadcrumbName: 'first',
-          children: [
-            {
-              path: '/general',
-              breadcrumbName: 'General',
-            },
-            {
-              path: '/layout',
-              breadcrumbName: 'Layout',
-            },
-            {
-              path: '/navigation',
-              breadcrumbName: 'Navigation',
-            },
-          ],
-        },
-        {
-          path: 'second',
-          breadcrumbName: 'second',
-        },
-      ],
-    };
+  mounted() {
+    console.log(this.$route);
   },
 };
 </script>
+<style lang="less" scoped>
+.breadcrumbContainer {
+  height: 64px;
+  .ant-breadcrumb {
+    line-height: 58px;
+  }
+}
+</style>

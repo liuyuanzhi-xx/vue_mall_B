@@ -1,19 +1,16 @@
 <template>
   <div class="homeContainer">
-      <Layout />
+    <Layout />
   </div>
 </template>
 
 <script>
-import Layout from "@/components/Layout"
+import Layout from "@/components/Layout";
 export default {
-  components:{
-    Layout
-  }
-  
-}
+  components: {
+    Layout,
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

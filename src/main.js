@@ -15,7 +15,8 @@ import {
   Tooltip,
   Row,
   Col,
-  Spin
+  Spin,
+  Breadcrumb
 
 } from 'ant-design-vue';
 Vue.use(Layout)
@@ -30,12 +31,13 @@ Vue.use(Tooltip)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Spin)
+Vue.use(Breadcrumb)
 
 
 
 
 
-console.log(Message)
+
 Vue.prototype.$Message = Message
 // Vue.component(Modal.name, Modal)
 
