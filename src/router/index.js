@@ -1,29 +1,55 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Login from "@/views/Login"
+import Register from "@/views/Register"
+import FindBack from "@/views/FindBack"
+// import Statistics from "@/views/Statistics"
+import Home from "@/views/Home"
+import store from "@/store"
+
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
+const routes = [{
+    path: "/",
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: "/login",
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: 'Register',
+    component: Register,
+  },
+  {
+    path: "/findBack",
+    name: 'FindBack',
+    component: FindBack,
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  mode: 'hash',
   routes
 })
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login' && to.path !== '/register' && to.path !== '/findBack') {
+    if (store.state.user.userInfo.appkey &&
+      store.state.user.userInfo.username &&
+      store.state.user.userInfo.email &&
+      store.state.user.userInfo.role) {
+      next()
+    } else {
+      next('/login')
+    }
+  }
+  next()
+})
+
+
 
 export default router
