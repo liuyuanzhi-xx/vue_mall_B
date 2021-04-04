@@ -63,6 +63,6 @@ export default {
   margin: 16px;
 }
 #components-layout-demo-custom-trigger {
-  height: 100vh;
+  min-height: 100vh;
 }
 </style>

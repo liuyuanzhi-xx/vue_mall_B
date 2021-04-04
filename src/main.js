@@ -20,7 +20,9 @@ import {
   Spin,
   Breadcrumb,
   Dropdown,
-  Card
+  Card,
+  Select,
+  Table
 
 } from 'ant-design-vue';
 Vue.use(VCharts)
@@ -40,6 +42,12 @@ Vue.use(Spin)
 Vue.use(Breadcrumb)
 Vue.use(Dropdown)
 Vue.use(Card)
+Vue.use(Select)
+Vue.use(Table)
+
+// Vue.use(RadioGroup)
+
+
 
 
 

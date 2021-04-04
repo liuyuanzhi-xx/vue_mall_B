@@ -45,7 +45,7 @@ export default {
   },
   methods: {},
   created() {
-    console.log(this.$store.state.menu.menuRouter);
+    // console.log(this.$store.state.menu.menuRouter);
   },
 };
 </script>

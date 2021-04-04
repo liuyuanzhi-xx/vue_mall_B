@@ -14,9 +14,7 @@
 </template>
 <script>
 export default {
-  mounted() {
-    console.log(this.$route);
-  },
+  mounted() {},
 };
 </script>
 <style lang="less" scoped>
