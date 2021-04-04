@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from "./store"
+import VCharts from 'v-charts';
+
 import {
   Layout,
   Menu,
@@ -16,9 +18,13 @@ import {
   Row,
   Col,
   Spin,
-  Breadcrumb
+  Breadcrumb,
+  Dropdown,
+  Card
 
 } from 'ant-design-vue';
+Vue.use(VCharts)
+
 Vue.use(Layout)
 Vue.use(Menu)
 Vue.use(Icon)
@@ -32,6 +38,10 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Spin)
 Vue.use(Breadcrumb)
+Vue.use(Dropdown)
+Vue.use(Card)
+
+
 
 
 

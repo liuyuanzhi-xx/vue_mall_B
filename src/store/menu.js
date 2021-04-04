@@ -8,6 +8,9 @@ export default {
             Object.assign(state.menuRouter, payload)
             // state.menuRouter = payload;
         },
+        removeMenuRouter(state) {
+            state.menuRouter = {};
+        }
     },
     actions: {
         asyncSetMenuRouter({

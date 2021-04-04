@@ -5,13 +5,15 @@ export default {
     namespaced: true,
     state: {
         userInfo: getUserCookie(),
-        // userInfo: {},
 
     },
     mutations: {
         setLogined(state, payload) {
             state.userInfo = payload;
         },
+        removeUserInfo(state) {
+            state.userInfo = {};
+        }
     },
     actions: {}
 

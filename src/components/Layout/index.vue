@@ -3,13 +3,14 @@
     <a-layout id="components-layout-demo-custom-trigger">
       <Aside :collapsed="collapsed" />
       <a-layout>
-        <a-layout-header style="background: #fff; padding: 0;display:flex">
+        <a-layout-header style="background: #fff; padding: 0;position:relative">
           <a-icon
             class="trigger"
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
             @click="() => (collapsed = !collapsed)"
           />
           <Breadcrumb class="menu-fold" />
+          <DropDown />
         </a-layout-header>
         <a-layout-content
           :style="{
@@ -28,10 +29,12 @@
 <script>
 import Aside from "@/components/Aside";
 import Breadcrumb from "@/components/Breadcrumb";
+import DropDown from "@/components/DropDown";
 export default {
   components: {
     Aside,
     Breadcrumb,
+    DropDown,
   },
   data() {
     return {

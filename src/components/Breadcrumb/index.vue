@@ -22,6 +22,9 @@ export default {
 <style lang="less" scoped>
 .breadcrumbContainer {
   height: 64px;
+  position: absolute;
+  top: 0;
+  left: 66px;
   .ant-breadcrumb {
     line-height: 58px;
   }
