@@ -3,6 +3,7 @@
     <div class="cardContainer">
       <Card :content="cardList" />
     </div>
+    <br />
     <div class="chartsContainer">
       <Charts />
     </div>

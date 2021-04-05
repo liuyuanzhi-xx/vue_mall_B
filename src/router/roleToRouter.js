@@ -15,6 +15,8 @@ const roleToRouter = {
         name: "ProductList"
     }, {
         name: 'ProductAdd'
+    }, {
+        name: "ProductEdit"
     }],
     "admin": [{
         name: "Product"
@@ -23,12 +25,15 @@ const roleToRouter = {
     }, {
         name: 'ProductAdd'
     }, {
+        name: "ProductEdit"
+    }, {
         name: "Category"
     }]
 }
 let isFirstEnter = true;
 export function getMenuRouter(role, router) {
     const allowMenuRouter = roleToRouter[role].map(item => item.name);
+    // console.log(allowMenuRouter)
     const resultMenuRouter = router.filter(item => {
         if (item.children) {
             item.children = item.children.filter(item2 => {
@@ -40,6 +45,7 @@ export function getMenuRouter(role, router) {
         else return false;
     })
     return resultMenuRouter;
+
 }
 
 export function logOut() {
@@ -56,13 +62,8 @@ export function setMenuRouter(to, from, next) {
             store.state.user.userInfo.role) {
             if (isFirstEnter) {
                 let resultMenuRouter = getMenuRouter(store.state.user.userInfo.role, asyncRoutes);
-                let MenuRouter = routes.concat(resultMenuRouter).filter(item => {
-                    if (item.name == 'Login' || item.name == 'Register' || item.name == 'FindBack') {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                })
+                console.log(resultMenuRouter)
+                let MenuRouter = routes.concat(resultMenuRouter);
                 store.dispatch('menu/asyncSetMenuRouter', MenuRouter).then(() => {
                     resultMenuRouter.forEach((item) => {
                         router.addRoute(item);

@@ -1,6 +1,14 @@
 <template>
   <div class="productList">
     <SearchBar :categoryList="categoryList" @search="handleSearch" />
+
+    <a-button
+      type="primary"
+      @click="handleAdd"
+      style="float:right;margin-top:-35px"
+      >添加商品</a-button
+    >
+
     <br />
     <TableList
       :data="productList"
@@ -13,8 +21,8 @@
 </template>
 
 <script>
-import { searchProduct } from "@/api/product";
-import { getCategory } from "@/api/category";
+import { searchProduct, deleteProduct } from "@/api/product";
+import { getCategoryList } from "@/utils/category";
 import SearchBar from "./SearchBar";
 import TableList from "./TableList";
 export default {
@@ -40,9 +48,37 @@ export default {
   methods: {
     async handleDelete(e) {
       console.log(e);
+      const _this = this;
+      this.$confirm({
+        title: "你确定要删除吗",
+        content: (h) => <div>你确定要删除{e.title}商品吗？</div>,
+        okText: "是",
+        okType: "danger",
+        cancelText: "否",
+        async onOk() {
+          let res = await deleteProduct(e.id);
+          if (res.status === "success") {
+            _this.getProductList();
+            _this.$Message.success(`删除成功!`);
+          } else {
+            _this.$Message.error(`删除失败!`);
+          }
+        },
+        onCancel() {
+          // console.log("Cancel");
+        },
+      });
     },
     async handleEdit(e) {
-      console.log(e);
+      this.$router.push({
+        name: "ProductEdit",
+        params: {
+          id: e.id,
+        },
+      });
+    },
+    handleAdd() {
+      this.$router.push({ name: "ProductAdd" });
     },
     async changePage(options) {
       this.pager = options;
@@ -74,16 +110,10 @@ export default {
     },
   },
   async created() {
-    let category = await getCategory();
-    console.log(category);
-    if (category.status === "success") {
-      this.categoryList = category.data.data;
-      this.categoryList.forEach((item) => {
-        this.categoryNames[item.id] = item.name;
-      });
-    } else {
-      this.$Message.error(`获取类目信息失败`);
-    }
+    this.categoryList = await getCategoryList();
+    this.categoryList.forEach((item) => {
+      this.categoryNames[item.id] = item.name;
+    });
     this.getProductList();
   },
 };

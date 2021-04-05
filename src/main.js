@@ -22,7 +22,11 @@ import {
   Dropdown,
   Card,
   Select,
-  Table
+  Table,
+  Modal,
+  Steps,
+  Upload,
+
 
 } from 'ant-design-vue';
 Vue.use(VCharts)
@@ -44,8 +48,14 @@ Vue.use(Dropdown)
 Vue.use(Card)
 Vue.use(Select)
 Vue.use(Table)
+Vue.use(Steps)
+Vue.use(Upload)
+Vue.use(Modal)
 
-// Vue.use(RadioGroup)
+
+
+
+
 
 
 
@@ -57,13 +67,8 @@ Vue.use(Table)
 
 
 Vue.prototype.$Message = Message
-// Vue.component(Modal.name, Modal)
+Vue.prototype.$confirm = Modal.confirm
 
-// Vue.use({
-//   Layout,
-//   Menu,
-//   Icon
-// })
 
 
 

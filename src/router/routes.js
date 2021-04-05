@@ -8,7 +8,8 @@ export const routes = [{
         meta: {
             name: 'Home',
             title: '首页',
-            icon: 'home'
+            icon: 'home',
+            hidden: false
         },
         component: Home,
         children: [{
@@ -16,7 +17,8 @@ export const routes = [{
             name: 'Statistics',
             meta: {
                 title: '统计',
-                icon: 'line-chart'
+                icon: 'line-chart',
+                hidden: false
             },
             component: Statistics,
         }]
@@ -26,7 +28,8 @@ export const routes = [{
         name: 'Login',
         meta: {
             title: '登陆',
-            icon: 'login'
+            icon: 'login',
+            hidden: true
         },
         component: Login,
     },
@@ -34,7 +37,8 @@ export const routes = [{
         path: "/register",
         name: 'Register',
         meta: {
-            title: '注册'
+            title: '注册',
+            hidden: true
         },
         component: Register,
     },
@@ -42,7 +46,8 @@ export const routes = [{
         path: "/findBack",
         name: 'FindBack',
         meta: {
-            title: '找回密码'
+            title: '找回密码',
+            hidden: true
         },
         component: FindBack,
     }
@@ -50,12 +55,11 @@ export const routes = [{
 
 export const asyncRoutes = [{
     path: "/product",
-    // name: 'Product',
     meta: {
         name: 'Product',
-
         title: '商品',
-        icon: 'dropbox'
+        icon: 'dropbox',
+        hidden: false
     },
     component: Home,
     children: [{
@@ -63,7 +67,8 @@ export const asyncRoutes = [{
         name: 'ProductList',
         meta: {
             title: '商品列表',
-            icon: 'unordered-list'
+            icon: 'unordered-list',
+            hidden: false
         },
         component: () => import("@/views/ProductList"),
     }, {
@@ -71,7 +76,17 @@ export const asyncRoutes = [{
         name: 'ProductAdd',
         meta: {
             title: '添加商品',
-            icon: 'file-add'
+            icon: 'file-add',
+            hidden: false
+        },
+        component: () => import("@/views/ProductAdd"),
+    }, {
+        path: "/edit/:id",
+        name: 'ProductEdit',
+        meta: {
+            title: '编辑商品',
+            icon: 'edit',
+            hidden: true
         },
         component: () => import("@/views/ProductAdd"),
     }, {
@@ -79,8 +94,8 @@ export const asyncRoutes = [{
         name: 'Category',
         meta: {
             title: '类目管理',
-            icon: 'profile'
-
+            icon: 'profile',
+            hidden: false
         },
         component: () => import("@/views/Category"),
     }]

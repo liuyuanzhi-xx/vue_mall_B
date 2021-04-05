@@ -110,7 +110,7 @@ export default {
               setUserCookie(res.data);
             }
             this.$store.commit("user/setLogined", res.data);
-            this.$router.push("/");
+            this.$router.push({ name: "Statistics" });
           }
         }
       });
