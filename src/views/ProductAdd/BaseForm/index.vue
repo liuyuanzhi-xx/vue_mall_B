@@ -4,6 +4,7 @@
     :model="form"
     :label-col="{ span: 5 }"
     :wrapper-col="{ span: 13 }"
+    :rules="rules"
   >
     <a-form-model-item label="标题" prop="title" required>
       <a-input v-model="form.title" />
@@ -22,7 +23,11 @@
           {{ c.name }}
         </a-select-option>
       </a-select>
-      <a-select v-model="form.c_item" placeholder="请添加子类目">
+      <a-select
+        v-model="form.c_item"
+        placeholder="请添加子类目"
+        @change="changeChild"
+      >
         <a-select-option v-for="c in categoryChildrens" :key="c" :value="c">
           {{ c }}
         </a-select-option>
@@ -59,14 +64,20 @@ export default {
   data() {
     return {
       formLayout: "horizontal",
+      rules: {},
       categoryList: [],
       categoryChildrens: [],
     };
   },
   methods: {
     next() {
-      console.log(this.form);
-      this.$emit("next", this.form);
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.$emit("next", this.form);
+        }
+        console.log("error submit!!");
+        return false;
+      });
     },
     changeCategory(e) {
       console.log(e);
@@ -77,6 +88,9 @@ export default {
         }
       }
       this.form.c_item = this.categoryChildrens[0];
+    },
+    changeChild(e) {
+      console.log(e);
     },
   },
 

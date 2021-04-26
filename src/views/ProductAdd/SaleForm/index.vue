@@ -80,27 +80,29 @@ export default {
     };
   },
   methods: {
-    next() {
-      console.log(this.form);
-      this.$emit("next", this.form);
-    },
     prev() {
       console.log(this.form);
       this.$emit("prev", this.form);
     },
     submit() {
-      console.log(this.form);
-      this.$emit("submit", this.form);
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.$emit("submit", this.form);
+          return true;
+        }
+        console.log("error submit!!");
+        return false;
+      });
     },
     handleChange(e) {
       console.log(e);
       let file = e.file;
       let fileList = e.fileList;
       if (file.status === "done") {
-        console.log(file);
+        // console.log(file);
         this.form.images.push(file.response.data.url);
       } else if (file.status === "removed") {
-        console.log(file.response);
+        // console.log(file.response);
         const { url } = file.response.data;
         this.form.images = this.form.images.filter((item) => item !== url);
       }
@@ -119,21 +121,24 @@ export default {
     },
   },
 
-  async created() {
+  created() {
     console.log(this.form);
-    this.fileList = this.form.images.map((item, index) => {
-      return {
-        uid: index,
-        name: `img-${index}.png`,
-        status: "done",
-        url: item,
-      };
-    });
+    if (this.form.images.length != 0) {
+      this.fileList = this.form.images.map((item, index) => {
+        return {
+          uid: index,
+          name: `img-${index}.png`,
+          status: "done",
+          url: item,
+        };
+      });
+    }
+
+    console.log(this.fileList);
   },
 };
 </script>
 <style>
-/* you can make up upload button and sample style by using stylesheets */
 .ant-upload-select-picture-card i {
   font-size: 32px;
   color: #999;

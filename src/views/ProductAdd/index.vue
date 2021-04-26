@@ -10,7 +10,7 @@
         </div>
       </div>
       <div v-show="current == 1">
-        <div>
+        <div v-if="form.category != '' || $route.name === 'ProductAdd'">
           <SaleForm :form="form" @prev="prev" @submit="submit" />
         </div>
       </div>
@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import { productDetail, editProduct } from "@/api/product";
+import { productDetail, editProduct, addProduct } from "@/api/product";
 
 import BaseForm from "./BaseForm";
 import SaleForm from "./SaleForm";
@@ -66,7 +66,8 @@ export default {
     },
     async submit(e) {
       this.form = e;
-      if (this.$router.history.current.params.id) {
+      // console.log((this.$route.name = "ProductEdit"));
+      if (this.$route.name === "ProductEdit") {
         const res = await editProduct(this.form);
         if (res.status === "success") {
           this.$Message.success(`编辑成功！`);
@@ -75,6 +76,15 @@ export default {
           this.$Message.error(`编辑失败！`);
         }
       } else {
+        const res = await addProduct(this.form);
+        this.$router.push({ name: "ProductAdd" });
+        this.$router.go(0);
+        if (res.status === "success") {
+          this.$Message.success(`新增成功！`);
+          this.$router.push({ name: "ProductAdd" });
+        } else {
+          this.$Message.error(`新增失败！`);
+        }
       }
     },
   },
@@ -84,6 +94,24 @@ export default {
       let res = await productDetail(id);
       this.form = res.data;
     }
+  },
+  watch: {
+    "$route.name"(newVal, oldVal) {
+      if (newVal === "ProductAdd") {
+        this.form = {
+          title: "",
+          desc: "",
+          category: "",
+          c_items: [],
+          tags: [],
+          price: 0,
+          price_off: 0,
+          unit: "",
+          inventory: 0,
+          images: [],
+        };
+      }
+    },
   },
 };
 </script>

@@ -17,3 +17,7 @@ export async function editProduct(options) {
     // console.log(options)
     return await request.put(`/products/edit`, options);
 }
+export async function addProduct(options) {
+    // console.log(options)
+    return await request.post(`/products/add`, options);
+}
