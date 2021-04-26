@@ -23,3 +23,9 @@ npm run serve
 ```
 
 ### 项目截图
+
+![Image](https://github.com/liuyuanzhi-xx/vue_mall_B/blob/master/readmeImg/img1.png)
+![Image](https://github.com/liuyuanzhi-xx/vue_mall_B/blob/master/readmeImg/img2.png)
+![Image](https://github.com/liuyuanzhi-xx/vue_mall_B/blob/master/readmeImg/img3.png)
+![Image](https://github.com/liuyuanzhi-xx/vue_mall_B/blob/master/readmeImg/img4.png)
+![Image](https://github.com/liuyuanzhi-xx/vue_mall_B/blob/master/readmeImg/img5.png)
